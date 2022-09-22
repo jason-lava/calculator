@@ -1,0 +1,45 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 550px;
+    height: 650px;
+    background-color: slategray;
+    padding: 12px;
+    border: medium solid black;
+    border-radius: 22px;
+}
+
+#display {
+    width: 488px;
+    height: 120px;
+    background-color: papayawhip;
+    border: medium solid black;
+    border-radius: 8px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-size: 75px;
+}
+
+.buttons {
+    display: grid;
+    padding: 12px;
+}
+
+button {
+    height: 90px;
+    width: 120px;
+    font-size: 24px;
+    margin-bottom: 2px;
+    border: light solid black;
+    border-radius: 8px;
+}
+
+#clearBtn,
+#zeroBtn {
+    width: 244.5px;
+}
+
+
