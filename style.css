@@ -1,26 +1,56 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: oldlace;
+}
+
 .main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 550px;
-    height: 650px;
-    background-color: slategray;
+    width: 400px;
+    height: 550px;
+    background-color: lightslategray;
     padding: 12px;
     border: medium solid black;
     border-radius: 22px;
 }
 
+#header {
+    font-size: 26px;
+    font-weight: 550;
+}
+
+#container {
+    display: flex;
+    width: 365px;
+    justify-content: space-between;
+}
+
+#solarPower {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.solarPower {
+    background-color: black;
+    border: 1px dotted rgb(255,114,118);
+    height: 30px;
+    width: 20px;
+}
+
 #display {
-    width: 488px;
-    height: 120px;
+    width: 360px;
+    height: 110px;
     background-color: papayawhip;
     border: medium solid black;
     border-radius: 8px;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    font-size: 75px;
+    font-size: 90px;
 }
 
 .buttons {
@@ -29,8 +59,8 @@
 }
 
 button {
-    height: 90px;
-    width: 120px;
+    height: 65px;
+    width: 90px;
     font-size: 24px;
     margin-bottom: 2px;
     border: light solid black;
@@ -39,7 +69,7 @@ button {
 
 #clearBtn,
 #zeroBtn {
-    width: 244.5px;
+    width: 184px;
 }
 
 
