@@ -16,8 +16,7 @@ const equalBtnHTML = document.getElementById('equalBtn');
 let num1 = ''
 let num2 = ''
 let operator = ''
-
-let displayValue = ''
+let result = ''
 
 displayHTML.textContent = ''
 
@@ -27,36 +26,60 @@ const stringNumHTML = document.querySelectorAll('.number');
 stringNumHTML.forEach((button) => {
     button.addEventListener('click', () => {
         if (displayHTML.textContent === '') {
-            displayValue = button.textContent;
-            return displayHTML.textContent = displayValue;
+            displayHTML.textContent = button.textContent;
+            return displayHTML.textContent;
         } else {
-            displayValue += button.textContent
-            return displayHTML.textContent = displayValue
+            displayHTML.textContent += button.textContent
+            return displayHTML.textContent;
         }
     })
 });
 
-const storedNum = document.querySelector("#previousNum");
-storedNum.textContent = num1;
+const previousNum = document.querySelector("#previousNum");
+
+previousNum.textContent = ''
 
 const operatorHTML = document.querySelectorAll('.operator');
 
 operatorHTML.forEach((button) => {
     button.addEventListener('click', () => {
-        if (num1 === '') {
-            num1 = displayValue;
+        if (operator === '/' && num2 === 0) {
+            return displayHTML.textContent = 'no';
+        } if (result !== '') {
+            num1 = displayHTML.textContent;
             operator = button.textContent;
-            return displayHTML.textContent = displayValue, storedNum.textContent = `${num1} ${operator}`;
-        } else if (displayValue === 0 && operator === '/') {
-            return null
-        } else if (num1 !== '') {
-            num1 = equal(num1, operator, Number(displayValue));
-            num1 = +num1;
+            result = '';
+            return previousNum.textContent = `'  ${num1} ${operator}`, displayHTML.textContent = '';
+        } if (num1 === '') {
+            num1 = displayHTML.textContent;
             operator = button.textContent;
-            return storedNum.textContent = `${num1} ${operator}`;
-        }
+            return previousNum.textContent = `'  ${num1} ${operator}`, displayHTML.textContent = '';
+        } if (num1 !== '') {
+            num2 = displayHTML.textContent;
+            previousNum.textContent = `'  ${num1} ${operator} ${num2} =`
+            result = equal(Number(num1), operator, Number(displayHTML.textContent)); 
+            return displayHTML.textContent = result;
+        } 
     })
 })
+
+// operator and clear functions
+const clear = function() {
+    displayHTML.textContent = ''
+    previousNum.textContent = ''
+    num1 = ''
+    num2 = ''
+    operator = ''
+    result = ''
+}
+
+// operator eventListeners
+equalBtnHTML.addEventListener('click', () => {
+    equal(num1, operator, num2);
+});
+clearBtnHTML.addEventListener('click', () => {
+    clear();
+});
 
 // maths functions
 const add = function(num1, num2) {
@@ -91,17 +114,3 @@ const equal = function(num1, operator, num2) {
             return power(num1, num2)
     }
 }
-
-// operator and clear functions
-
-const clear = function() {
-    displayHTML.textContent = ''
-}
-
-// operator eventListeners
-equalBtnHTML.addEventListener('click', () => {
-    equal(num1, operator, num2);
-});
-clearBtnHTML.addEventListener('click', () => {
-    clear();
-});

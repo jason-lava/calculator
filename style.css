@@ -41,6 +41,20 @@ body {
     width: 20px;
 }
 
+#displayContainer {
+    display: grid;
+    grid-template-columns: 0px 1fr;
+    grid-template-rows: 115px 1fr;
+}
+
+#previousNum {
+    height: 25px;
+    width: 365px;
+    font-size: 20px;
+    display: flex;
+    justify-content: left;
+}
+
 #display {
     width: 360px;
     height: 110px;
