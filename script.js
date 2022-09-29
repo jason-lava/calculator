@@ -1,46 +1,7 @@
-// maths
-const add = function() {
-    console.log('add');
-    return num1+num2;
-}
-const subtract = function(num1, num2) {
-    console.log('subtract');
-    return num1-num2;
-}
-const multiply = function(num1, num2) {
-    console.log('times');
-}
-const divide = function(num1, num2) {
-    console.log('divide');
-}
-const power = function(num1, num2) {
-    console.log('power');
-    return Math.pow(num1, num2);
-}
-const equal = function(num1, num2) {
-    console.log('equal');
-}
-
-// operate - takes 2 #' then call a function
-const operate = function(equal) {
-    // calls one of the add, subtract, multiply, or divide functions on the 2 #'s
-}
-
-// constants and eventListeners
+// constants (eventListeners at bottom)
 const displayHTML = document.getElementById('display');
 
 const clearBtnHTML = document.getElementById('clearBtn');
-
-const zeroBtnHTML = document.getElementById('zeroBtn');
-const oneBtnHTML = document.getElementById('oneBtn');
-const twoBtnHTML = document.getElementById('twoBtn');
-const threeBtnHTML = document.getElementById('threeBtn');
-const fourBtnHTML = document.getElementById('fourBtn');
-const fiveBtnHTML = document.getElementById('fiveBtn');
-const sixBtnHTML = document.getElementById('sixBtn');
-const sevenBtnHTML = document.getElementById('sevenBtn');
-const eightBtnHTML = document.getElementById('eightBtn');
-const nineBtnHTML = document.getElementById('nineBtn');
 
 const decimalBtnHTML = document.getElementById('decimalBtn');
 
@@ -51,76 +12,96 @@ const divideBtnHTML = document.getElementById('divideBtn');
 const powerBtnHTML = document.getElementById('powerBtn');
 const equalBtnHTML = document.getElementById('equalBtn');
 
-// update display
+// initialize and update display
+let num1 = ''
+let num2 = ''
+let operator = ''
 
-const displayStart = ['1','+','2'];
-displayHTML.textContent = 
-    displayStart[0] +
-    displayStart[1] +
-    displayStart[2] ;
+let displayValue = ''
 
-// clear eventListener
-clearBtnHTML.addEventListener('click', () => {
-    displayHTML.textContent = "";
-});
+displayHTML.textContent = ''
 
-// number eventListeners
-zeroBtnHTML.addEventListener('click', () => {
-    displayHTML.textContent = zeroBtnHTML.value;
-});
-oneBtnHTML.addEventListener('click', () => {
-    displayHTML.textContent = oneBtnHTML.value;
-});
-twoBtnHTML.addEventListener('click', () => {
-    displayHTML.textContent = twoBtnHTML.value;
-});
-threeBtnHTML.addEventListener('click', () => {
-    displayHTML.textContent = threeBtnHTML.value;
-});
-fourBtnHTML.addEventListener('click', () => {
-    displayHTML.textContent = fourBtnHTML.value;
-});
-fiveBtnHTML.addEventListener('click', () => {
-    displayHTML.textContent = fiveBtnHTML.value;
-});
-sixBtnHTML.addEventListener('click', () => {
-    displayHTML.textContent = sixBtnHTML.value;
-});
-sevenBtnHTML.addEventListener('click', () => {
-    displayHTML.textContent = sevenBtnHTML.value;
-});
-eightBtnHTML.addEventListener('click', () => {
-    displayHTML.textContent = eightBtnHTML.value;
-});
-nineBtnHTML.addEventListener('click', () => {
-    displayHTML.textContent = nineBtnHTML.value;
+// button and operator eventListeners
+const stringNumHTML = document.querySelectorAll('.number');
+
+stringNumHTML.forEach((button) => {
+    button.addEventListener('click', () => {
+        if (displayHTML.textContent === '') {
+            displayValue = button.textContent;
+            return displayHTML.textContent = displayValue;
+        } else {
+            displayValue += button.textContent
+            return displayHTML.textContent = displayValue
+        }
+    })
 });
 
-decimalBtnHTML.addEventListener('click', () => {
-    displayHTML.textContent = decimalBtnHTML.value;
-});
+const storedNum = document.querySelector("#previousNum");
+storedNum.textContent = num1;
 
-// maths eventListeners
-addBtnHTML.addEventListener('click', () => {
-    displayHTML.textContent = addBtnHTML.value;
-    add();
-});
-subtractBtnHTML.addEventListener('click', () => {
-    displayHTML.textContent = subtractBtnHTML.value;
-    subtract();
-});
-multiplyBtnHTML.addEventListener('click', () => {
-    displayHTML.textContent = multiplyBtnHTML.value;
-    multiply();
-});
-divideBtnHTML.addEventListener('click', () => {
-    displayHTML.textContent = divideBtnHTML.value;
-    divide();
-});
-powerBtnHTML.addEventListener('click', () => {
-    displayHTML.textContent = powerBtnHTML.value;
-    power();
-});
+const operatorHTML = document.querySelectorAll('.operator');
+
+operatorHTML.forEach((button) => {
+    button.addEventListener('click', () => {
+        if (num1 === '') {
+            num1 = displayValue;
+            operator = button.textContent;
+            return displayHTML.textContent = displayValue, storedNum.textContent = `${num1} ${operator}`;
+        } else if (displayValue === 0 && operator === '/') {
+            return null
+        } else if (num1 !== '') {
+            num1 = equal(num1, operator, Number(displayValue));
+            num1 = +num1;
+            operator = button.textContent;
+            return storedNum.textContent = `${num1} ${operator}`;
+        }
+    })
+})
+
+// maths functions
+const add = function(num1, num2) {
+    return num1 + num2;
+}
+const subtract = function(num1, num2) {
+    return num1 - num2;
+}
+const multiply = function(num1, num2) {
+    return num1 * num2;
+}
+const divide = function(num1, num2) {
+    return num1 / num2;
+}
+const power = function(num1, num2) {
+    return Math.pow(num1, num2);
+}
+const equal = function(num1, operator, num2) {
+    num1 = Number(num1)
+    num2 = Number(num2)
+    switch (operator) {
+        case '+':
+            return add(num1, num2)
+        case '-':
+            return subtract(num1, num2)
+        case 'x':
+            return multiply(num1, num2)
+        case '/':
+            if (num2 ===0) return null
+            else return divide(num1, num2)
+        case '^':
+            return power(num1, num2)
+    }
+}
+
+// operator and clear functions
+
+const clear = function() {
+    displayHTML.textContent = ''
+}
+
+// operator eventListeners
 equalBtnHTML.addEventListener('click', () => {
-    equal();
+    equal(num1, operator, num2);
+});
+clearBtnHTML.addEventListener('click', () => {
+    clear();
 });
