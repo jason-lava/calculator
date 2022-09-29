@@ -10,7 +10,7 @@
     <body>
       <main class="main">
         <container id="container">
-            <div id="header">CALCULO</div>
+            <div id="header">⚡ CALCULO ⚡</div>
             <container id="solarPower">
                 <div class="solarPower"></div>
                 <div class="solarPower"></div>
@@ -20,38 +20,38 @@
                 <div class="solarPower"></div>
             </container>
         </container>
+        <div id="previousNum"></div>
         <div id="display" value=""></div>  
         <div class="buttons">
             <div id="row0">
-                <button id="clearBtn">Clear</button>
-                <button id="powerBtn" value="^">^</button>
-                <button id="divideBtn" value="/">÷</button>
+                <button class="operator" id="clearBtn">Clear</button>
+                <button class="operator" id="powerBtn">^</button>
+                <button class="operator" id="divideBtn">/</button>
             <div>
             <div id="row1">
-                <button id="sevenBtn" value="7">7</button>
-                <button id="eightBtn" value="8">8</button>
-                <button id="nineBtn" value="9">9</button>
-                <button id="multiplyBtn" value="*">x</button>
+                <button class="number" id="sevenBtn">7</button>
+                <button class="number" id="eightBtn">8</button>
+                <button class="number" id="nineBtn" >9</button>
+                <button class="operator" id="multiplyBtn">x</button>
             <div>
             <div id="row2">
-                <button id="fourBtn" value="4">4</button>
-                <button id="fiveBtn" value="5">5</button>
-                <button id="sixBtn" value="6">6</button>
-                <button id="subtractBtn" value="-"">-</button>
+                <button class="number" id="fourBtn">4</button>
+                <button class="number" id="fiveBtn">5</button>
+                <button class="number" id="sixBtn">6</button>
+                <button class="operator" id="subtractBtn">-</button>
             <div>
             <div id="row3">
-                <button id="oneBtn" value="1">1</button>
-                <button id="twoBtn" value="2">2</button>
-                <button id="threeBtn" value="3">3</button>
-                <button id="addBtn" value="+">+</button>
+                <button class="number" id="oneBtn">1</button>
+                <button class="number" id="twoBtn">2</button>
+                <button class="number" id="threeBtn">3</button>
+                <button class="operator" id="addBtn">+</button>
             </div>
             <div id="row4">
-                <button id="zeroBtn" value="0">0</button>
-                <button id="decimalBtn" value=".">.</button>
-                <button id="equalBtn" value="=">=</button>
+                <button class="number" id="zeroBtn">0</button>
+                <button class="operator" id="decimalBtn">.</button>
+                <button class="operator" id="equalBtn">=</button>
             </div>
           </div>
-          <div id="grid"></div>
       </main>
     </body>
   </html>
