@@ -1,16 +1,12 @@
 // constants (eventListeners at bottom)
-const displayHTML = document.getElementById('display');
-
+const equalBtnHTML = document.getElementById('equalBtn');
+const operatorHTML = document.querySelectorAll('.operator');
 const clearBtnHTML = document.getElementById('clearBtn');
 
 const decimalBtnHTML = document.getElementById('decimalBtn');
 
-const addBtnHTML = document.getElementById('addBtn');
-const subtractBtnHTML = document.getElementById('subtractBtn');
-const multiplyBtnHTML = document.getElementById('multiplyBtn');
-const divideBtnHTML = document.getElementById('divideBtn');
-const powerBtnHTML = document.getElementById('powerBtn');
-const equalBtnHTML = document.getElementById('equalBtn');
+const displayHTML = document.getElementById('display');
+const previousNum = document.querySelector("#previousNum");
 
 // initialize and update display
 let num1 = ''
@@ -19,6 +15,7 @@ let operator = ''
 let result = ''
 
 displayHTML.textContent = ''
+previousNum.textContent = ''
 
 // button and operator eventListeners
 const stringNumHTML = document.querySelectorAll('.number');
@@ -29,22 +26,16 @@ stringNumHTML.forEach((button) => {
             displayHTML.textContent = button.textContent;
             return displayHTML.textContent;
         } else {
-            displayHTML.textContent += button.textContent
+            displayHTML.textContent += button.textContent;
             return displayHTML.textContent;
         }
     })
 });
 
-const previousNum = document.querySelector("#previousNum");
-
-previousNum.textContent = ''
-
-const operatorHTML = document.querySelectorAll('.operator');
-
 operatorHTML.forEach((button) => {
     button.addEventListener('click', () => {
-        if (operator === '/' && num2 === 0) {
-            return displayHTML.textContent = 'no';
+        if (num1 === 'null') {
+            return clear();
         } if (result !== '') {
             num1 = displayHTML.textContent;
             operator = button.textContent;
@@ -58,7 +49,7 @@ operatorHTML.forEach((button) => {
             num2 = displayHTML.textContent;
             previousNum.textContent = `'  ${num1} ${operator} ${num2} =`
             result = equal(Number(num1), operator, Number(displayHTML.textContent)); 
-            return displayHTML.textContent = result;
+            return displayHTML.textContent = Number(result);
         } 
     })
 })
@@ -83,19 +74,19 @@ clearBtnHTML.addEventListener('click', () => {
 
 // maths functions
 const add = function(num1, num2) {
-    return num1 + num2;
+    return (+num1 + +num2).toFixed(3);
 }
 const subtract = function(num1, num2) {
-    return num1 - num2;
+    return (+num1 - +num2).toFixed(3);
 }
 const multiply = function(num1, num2) {
-    return num1 * num2;
+    return (+num1 * +num2).toFixed(3);
 }
 const divide = function(num1, num2) {
-    return num1 / num2;
+    return (+num1 / +num2).toFixed(3);
 }
 const power = function(num1, num2) {
-    return Math.pow(num1, num2);
+    return (Math.pow(+num1, +num2)).toFixed(3);
 }
 const equal = function(num1, operator, num2) {
     num1 = Number(num1)
@@ -108,7 +99,7 @@ const equal = function(num1, operator, num2) {
         case 'x':
             return multiply(num1, num2)
         case '/':
-            if (num2 ===0) return null
+            if (num2 === 0) return 'null'
             else return divide(num1, num2)
         case '^':
             return power(num1, num2)
