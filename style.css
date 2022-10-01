@@ -86,4 +86,12 @@ button {
     width: 184px;
 }
 
+.operator,
+.special {
+    background-color: goldenrod;
+}
 
+#clearBtn,
+.number {
+    background-color: whitesmoke;
+}
