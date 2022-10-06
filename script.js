@@ -27,24 +27,6 @@ let result = ''
 displayHTML.textContent = ''
 previousNum.textContent = ''
 
-const disableOperators = function() {
-    divideBtnHTML.disabled = true;
-    multiplyBtnHTML.disabled = true;
-    subtractBtnHTML.disabled = true;
-    addBtnHTML.disabled = true;
-    equalBtnHTML.disabled = true;
-}
-
-const enableOperators = function() {
-    divideBtnHTML.disabled = false;
-    multiplyBtnHTML.disabled = false;
-    subtractBtnHTML.disabled = false;
-    addBtnHTML.disabled = false;
-    equalBtnHTML.disabled = false;
-}
-
-disableOperators();
-
 // button and operator eventListeners
 stringNumHTML.forEach((button) => {
     button.addEventListener('click', () => {
@@ -53,7 +35,6 @@ stringNumHTML.forEach((button) => {
             displayHTML.textContent += button.textContent;
             return displayHTML.textContent;
         } else if (displayHTML.textContent === '') {
-            enableOperators();
             displayHTML.textContent = button.textContent;
             return displayHTML.textContent;
         } else {
@@ -66,8 +47,9 @@ stringNumHTML.forEach((button) => {
 operatorHTML.forEach((button) => {
     button.addEventListener('click', () => {
         decimalBtnHTML.disabled = false;
-        disableOperators();
-        if (num1 === 'NaN') {
+        if (displayHTML.textContent === '' && button.textContent) {
+            return 
+        } else if (num1 === 'NaN') {
             return clear();
         } else if (result !== '') {
             display.style.fontSize = '80px';
@@ -81,7 +63,6 @@ operatorHTML.forEach((button) => {
             operator = button.textContent;
             return previousNum.textContent = `'  ${num1} ${operator}`, displayHTML.textContent = '';
         } else if (num1 !== '') {
-            enableOperators();
             num2 = displayHTML.textContent;
             previousNum.textContent = `'  ${num1} ${operator} ${num2} =`
             result = (equal(Number(num1), operator, Number(displayHTML.textContent)));
